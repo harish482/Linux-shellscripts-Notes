@@ -1,6 +1,9 @@
 #!/bin/sh
 
-read $ENV
+# Ask the user for input so they aren't staring at a blank screen
+echo "Please enter environment (dev, uat, prod):"
+read ENV
+
 case "$ENV" in
     dev)
         DB_SERVER="dev-db.local"
@@ -16,7 +19,7 @@ case "$ENV" in
         ;;
     *)
         # The '*' acts like an "else". It catches any invalid inputs.
-        echo "Error: Invalid input! Use: $0 dev, uat, or prod"
+        echo "Error: Invalid input! Use: dev, uat, or prod"
         exit 1
         ;;
 esac
