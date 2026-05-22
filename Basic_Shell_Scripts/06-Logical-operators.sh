@@ -1,17 +1,26 @@
 #!/bin/bash
-#Purpose: Logical Operators/Boolean Operators. Student Marks Validation.
+
+THRESHOLD=90
+
+echo "--- Gathering Real-Time Storage Metrics ---"
+
+# 1. Grab the current usage percentage for critical partitions 
+# (df -h parses disk space, awk extracts just the percentage number)
+ROOT_USAGE=$(df / | awk 'NR==2 {print $5}' | tr -d '%')
+VAR_USAGE=$(df /var | awk 'NR==2 {print $5}' | tr -d '%')
+BOOT_USAGE=$(df /boot | awk 'NR==2 {print $5}' | tr -d '%')
+
+echo "Root (/) Partition Usage:      $ROOT_USAGE%"
+echo "/var Partition Usage:          $VAR_USAGE%"
+echo "/boot Partition Usage:         $BOOT_USAGE%"
+echo "----------------------------------------"
 
 
-echo -e "Enter Your Maths Subject Marks: \c"
-read -r m
-echo -e "Enter Your Physics Subject Marks: \c"
-read -r p
-echo -e "Enter Your Chemistry Subject Marks: \c"
-read -r c
-
-if [[ "$m" -ge 35 && "$p" -ge 35 && "$c" -ge 35 ]]; 
-then
-echo "Congratulations, You have passed in all subjects"
+if [[ "$ROOT_USAGE" -lt "$THRESHOLD" && "$VAR_USAGE" -lt "$THRESHOLD" && "$BOOT_USAGE" -lt "$THRESHOLD" ]]; then
+    echo "✅ HEALTH CHECK PASSED: All storage partitions are well within safe limits."
+    exit 0
 else
-echo "Sorry You not upto mark in one of the subject"
+    echo "🚨 ALERT: One or more storage partitions have exceeded the ${THRESHOLD}% safety threshold!"
+    echo "Action required: Clean up log files or expand disk volume immediately."
+    exit 1
 fi
