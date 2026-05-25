@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo yum install nginx cron* -y
+
 function StartService () {
     echo "⚙️ Attempting to start: $1..."  
     
@@ -24,6 +26,6 @@ function StartService () {
 
 echo "=== STARTING SERVER SERVICES ==="
 StartService "nginx"
-StartService "ssh"
-StartService "cron"
+StartService "sshd"
+StartService "crond"
 echo "=== SERVICE SEQUENCE COMPLETED ==="
