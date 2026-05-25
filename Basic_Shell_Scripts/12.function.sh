@@ -1,14 +1,10 @@
 #!/bin/bash
-#Purpose: Function
-
-function Welcome () {
-echo "HI Hello courses $1"
+function StartService () {
+    echo "⚙️ Starting service: $1..."  
+    echo "✅ $1 is now RUNNING."
 }
 
-#calling Fuction
-
-Welcome datascienc
-Welcome powerbi
-Welcome Linux
-Welcome AWS
-Welcome DevOps
+StartService "Database"
+StartService "Firewall"
+StartService "Nginx_Web_Server"
+StartService "SSH_Access"
