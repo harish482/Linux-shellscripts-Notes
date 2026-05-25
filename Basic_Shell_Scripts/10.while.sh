@@ -1,8 +1,9 @@
 #!/bin/bash
-echo -e "Enter value: \c"
-read -r a
-while [ $a -ge 0 ] ;
+# Keep looping as long as the user answers 'yes'
+ANSWER="yes"
+
+while [ "$ANSWER" == "yes" ]
 do
-echo "Reverse order number $a"
-let a--;
+    echo "The server is running smoothly..."
+    read -p "Keep monitoring? (yes/no): " ANSWER
 done
