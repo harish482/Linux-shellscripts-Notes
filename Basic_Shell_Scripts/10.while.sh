@@ -1,6 +1,8 @@
 #!/bin/bash
 
-while true
+INTERNET="working"
+
+while [ "$INTERNET" == "working" ]
 do
     if ping -c 1 google.com > /dev/null 2>&1
     then
