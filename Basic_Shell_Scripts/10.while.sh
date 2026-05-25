@@ -1,9 +1,12 @@
 #!/bin/bash
-# Keep looping as long as the user answers 'yes'
-ANSWER="yes"
 
-while [ "$ANSWER" == "yes" ]
+while true
 do
-    echo "The server is running smoothly..."
-    read -p "Keep monitoring? (yes/no): " ANSWER
+    if ping -c 1 google.com > /dev/null 2>&1
+    then
+        echo "✅ Google is online!"
+    else
+        echo "❌ Internet is DOWN!"
+        break
+    fi
 done
