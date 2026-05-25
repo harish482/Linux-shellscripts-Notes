@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# to execute ./10.if-else-statement.sh 50
+# to execute ./07-if-else-statement.sh 50
 
 NUMBER=$1
 
